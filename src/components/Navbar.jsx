@@ -1,3 +1,4 @@
+import Icons from "../assets/Icons.png";
 import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 
@@ -23,12 +24,17 @@ const Navbar = () => {
           className="group flex items-center gap-2"
           aria-label="RLK Home"
         >
-          <div
+          {/* <div
             className="flex h-11 w-11 items-center justify-center rounded-xl text-xl font-black text-white shadow-md transition-transform duration-300 group-hover:scale-105"
             style={{ backgroundColor: "#fb8d2e" }}
           >
             RLK
-          </div>
+          </div> */}
+          <img
+            src={Icons}
+            alt="Logo"
+             className="h-11 w-11 rounded-xl object-cover shadow-md transition-transform duration-300 group-hover:scale-105"
+          />
 
           <div className="hidden sm:block">
             <span

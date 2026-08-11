@@ -1,3 +1,4 @@
+import Icons from "../assets/Icons.png";
 import { Link } from "react-router-dom";
 
 const BRAND_COLORS = {
@@ -25,19 +26,23 @@ const serviceLinks = [
 const socialLinks = [
   {
     name: "GitHub",
-    href: "https://github.com/",
+    href: "https://github.com/rupeshlalkumar",
   },
   {
     name: "LinkedIn",
-    href: "https://www.linkedin.com/",
+    href: "https://www.linkedin.com/in/rupeshlalkumarrlk/",
   },
   {
     name: "Instagram",
-    href: "https://www.instagram.com/",
+    href: "https://www.instagram.com/rupeshlalkumar/",
   },
   {
     name: "YouTube",
-    href: "https://www.youtube.com/",
+    href: "https://www.youtube.com/@rupeshlal_kumar",
+  },
+  {
+    name: "Pinterest",
+    href: "https://in.pinterest.com/rupeshlalkumar/",
   },
 ];
 
@@ -50,17 +55,14 @@ const Footer = () => {
       aria-label="Site footer"
     >
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-
         {/* ========================================
             MAIN FOOTER
         ========================================= */}
         <div className="grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1fr]">
-
           {/* ======================================
               BRAND
           ======================================= */}
           <div className="max-w-sm">
-
             <Link
               to="/"
               aria-label="Rupesh Lal Kumar - Home"
@@ -70,7 +72,7 @@ const Footer = () => {
               }}
             >
               {/* Logo */}
-              <span
+              {/* <span
                 aria-hidden="true"
                 className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl text-lg font-black text-white shadow-lg transition-transform duration-300 group-hover:scale-105 motion-reduce:transition-none"
                 style={{
@@ -78,7 +80,12 @@ const Footer = () => {
                 }}
               >
                 RLK
-              </span>
+              </span> */}
+              <img
+                src={Icons}
+                alt="Logo"
+                className="h-11 w-11 rounded-xl object-cover shadow-md transition-transform duration-300 group-hover:scale-105"
+              />
 
               {/* Brand Name */}
               <span>
@@ -145,10 +152,7 @@ const Footer = () => {
               Quick Links
             </h2>
 
-            <nav
-              aria-label="Footer navigation"
-              className="mt-5"
-            >
+            <nav aria-label="Footer navigation" className="mt-5">
               <ul className="space-y-3">
                 {quickLinks.map((link) => (
                   <li key={link.path}>
@@ -226,16 +230,12 @@ const Footer = () => {
         {/* ========================================
             DIVIDER
         ========================================= */}
-        <div
-          aria-hidden="true"
-          className="h-px w-full bg-gray-800"
-        />
+        <div aria-hidden="true" className="h-px w-full bg-gray-800" />
 
         {/* ========================================
             BOTTOM FOOTER
         ========================================= */}
         <div className="flex flex-col gap-5 py-7 sm:flex-row sm:items-center sm:justify-between">
-
           {/* Copyright */}
           <p className="text-sm text-gray-500">
             © {currentYear}{" "}
