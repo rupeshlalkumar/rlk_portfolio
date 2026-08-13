@@ -1,3 +1,4 @@
+import Icons from "../assets/Icons.png";
 import { Link } from "react-router-dom";
 
 const BRAND_COLORS = {
@@ -10,7 +11,7 @@ const BRAND_COLORS = {
 const stats = [
   {
     value: "1+",
-    label: "Years Learning",
+    label: "Years Exprience",
     color: BRAND_COLORS.orange,
   },
   {
@@ -106,10 +107,7 @@ const Home = () => {
               className="text-5xl font-black leading-[1.05] tracking-tight text-gray-900 sm:text-6xl lg:text-7xl"
             >
               Rupesh Lal
-              <span
-                className="block"
-                style={{ color: BRAND_COLORS.orange }}
-              >
+              <span className="block" style={{ color: BRAND_COLORS.orange }}>
                 Kumar
               </span>
             </h1>
@@ -117,17 +115,15 @@ const Home = () => {
             {/* Professional Role */}
             <h2 className="mt-6 text-2xl font-bold leading-tight text-gray-800 sm:text-3xl">
               Software{" "}
-              <span style={{ color: BRAND_COLORS.green }}>
-                Entrepreneur
-              </span>{" "}
-              & Developer
+              <span style={{ color: BRAND_COLORS.green }}>Entrepreneur</span> &
+              Developer
             </h2>
 
             {/* Description */}
             <p className="mt-6 max-w-xl text-base leading-8 text-gray-600 sm:text-lg">
               I build modern websites and software solutions that help
-              businesses establish a strong digital presence, attract
-              customers, and grow online.
+              businesses establish a strong digital presence, attract customers,
+              and grow online.
             </p>
 
             {/* CTA */}
@@ -205,7 +201,7 @@ const Home = () => {
               {/* Card Content */}
               <div className="relative z-10 text-center">
                 {/* RLK Logo */}
-                <div
+                {/* <div
                   className="mx-auto flex h-28 w-28 items-center justify-center rounded-3xl text-3xl font-black text-white shadow-xl sm:h-32 sm:w-32 sm:text-4xl"
                   style={{
                     background: `linear-gradient(
@@ -219,21 +215,21 @@ const Home = () => {
                   }}
                 >
                   RLK
-                </div>
+                </div> */}
+                <img
+                  src={Icons}
+                  alt="RLK Logo"
+                  className="mx-auto flex h-28 w-28 items-center justify-center rounded-full object-cover shadow-xl sm:h-38 sm:w-38"
+                />
 
                 {/* Brand Message */}
                 <p className="mt-8 text-2xl font-black text-gray-900">
                   Build.
-                  <span style={{ color: BRAND_COLORS.orange }}>
-                    {" "}
-                    Learn.
-                  </span>
+                  <span style={{ color: BRAND_COLORS.orange }}> Learn.</span>
                 </p>
 
                 <p className="text-2xl font-black text-gray-900">
-                  <span style={{ color: BRAND_COLORS.green }}>
-                    Create.
-                  </span>{" "}
+                  <span style={{ color: BRAND_COLORS.green }}>Create.</span>{" "}
                   Grow.
                 </p>
 
@@ -273,9 +269,7 @@ const Home = () => {
                 </div>
 
                 <div>
-                  <p className="text-xs font-medium text-gray-500">
-                    Currently
-                  </p>
+                  <p className="text-xs font-medium text-gray-500">Currently</p>
 
                   <p className="text-sm font-bold text-gray-900">
                     Building & Learning
