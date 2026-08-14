@@ -1,4 +1,4 @@
-import Icons from "../assets/Icons.png";
+import Profile from "../assets/Profile.jpg";
 import { Link } from "react-router-dom";
 
 const BRAND_COLORS = {
@@ -217,9 +217,10 @@ const Home = () => {
                   RLK
                 </div> */}
                 <img
-                  src={Icons}
+                  src={Profile}
                   alt="RLK Logo"
                   className="mx-auto flex h-28 w-28 items-center justify-center rounded-full object-cover shadow-xl sm:h-38 sm:w-38"
+                  style={{ border: "4px solid #04abed" }}
                 />
 
                 {/* Brand Message */}

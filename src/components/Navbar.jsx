@@ -1,4 +1,4 @@
-import Icons from "../assets/Icons.png";
+import Profile from "../assets/Profile.jpg";
 import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 
@@ -31,9 +31,11 @@ const Navbar = () => {
             RLK
           </div> */}
           <img
-            src={Icons}
+            src={Profile}
             alt="Logo"
-             className="h-11 w-11 rounded-xl object-cover shadow-md transition-transform duration-300 group-hover:scale-105"
+             className="h-11 w-11 rounded-full object-cover shadow-md transition-transform duration-300 group-hover:scale-105"
+            style={{ border: "3px solid #04abed" }}
+
           />
 
           <div className="hidden sm:block">

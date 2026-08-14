@@ -1,4 +1,4 @@
-import Icons from "../assets/Icons.png";
+import Profile from "../assets/Profile.jpg";
 import { Link } from "react-router-dom";
 
 const BRAND_COLORS = {
@@ -82,7 +82,7 @@ const Footer = () => {
                 RLK
               </span> */}
               <img
-                src={Icons}
+                src={Profile}
                 alt="Logo"
                 className="h-11 w-11 rounded-xl object-cover shadow-md transition-transform duration-300 group-hover:scale-105"
               />
