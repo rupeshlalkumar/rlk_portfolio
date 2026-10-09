@@ -1,18 +1,21 @@
 import Profile from "../assets/Profile.jpg";
 import { Link } from "react-router-dom";
+import profile from "../data/profile";
 
 const BRAND_COLORS = {
-  orange: "#fb8d2e",
-  green: "#3aa540",
-  yellow: "#fcca0a",
-  azure: "#04abed",
+  orange: "#FB8D2E",
+  green: "#3AA540",
+  yellow: "#FCCA0A",
+  azure: "#04ABED",
 };
 
 const quickLinks = [
   { name: "Home", path: "/" },
   { name: "About", path: "/about" },
+  { name: "Businesses", path: "/businesses" },
   { name: "Projects", path: "/projects" },
-  { name: "Services", path: "/services" },
+  { name: "Journey", path: "/journey" },
+  { name: "Content", path: "/content" },
   { name: "Contact", path: "/contact" },
 ];
 
@@ -55,58 +58,46 @@ const Footer = () => {
       aria-label="Site footer"
     >
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        {/* ========================================
-            MAIN FOOTER
-        ========================================= */}
+        {/* Main Footer */}
         <div className="grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1fr]">
-          {/* ======================================
-              BRAND
-          ======================================= */}
+          {/* Brand */}
           <div className="max-w-sm">
             <Link
               to="/"
-              aria-label="Rupesh Lal Kumar - Home"
+              aria-label={`${profile.name} - Home`}
               className="group inline-flex items-center gap-3 rounded-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-4 focus-visible:ring-offset-gray-950"
               style={{
                 "--tw-ring-color": BRAND_COLORS.azure,
               }}
             >
-              {/* Logo */}
-              {/* <span
-                aria-hidden="true"
-                className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl text-lg font-black text-white shadow-lg transition-transform duration-300 group-hover:scale-105 motion-reduce:transition-none"
-                style={{
-                  backgroundColor: BRAND_COLORS.orange,
-                }}
-              >
-                RLK
-              </span> */}
               <img
                 src={Profile}
-                alt="Logo"
-                className="h-11 w-11 rounded-xl object-cover shadow-md transition-transform duration-300 group-hover:scale-105"
+                alt={profile.name}
+                className="h-11 w-11 rounded-xl object-cover shadow-md transition-transform duration-300 group-hover:scale-105 motion-reduce:transition-none"
               />
 
-              {/* Brand Name */}
               <span>
                 <span
                   className="block text-lg font-extrabold tracking-tight"
-                  style={{
-                    color: BRAND_COLORS.green,
-                  }}
+                  style={{ color: BRAND_COLORS.green }}
                 >
-                  Rupesh Lal Kumar
+                  {profile.name}
                 </span>
 
                 <span className="mt-0.5 block text-xs font-medium text-gray-400">
-                  Software Entrepreneur
+                  {profile.role}
                 </span>
               </span>
             </Link>
 
             <p className="mt-6 text-sm leading-7 text-gray-400">
-              I build modern websites and software solutions that help
-              businesses establish a strong digital presence and grow.
+              Building businesses, developing digital solutions, and sharing
+              the journey of entrepreneurship through practical work and
+              continuous learning.
+            </p>
+
+            <p className="mt-3 text-sm font-semibold text-gray-300">
+              {profile.tagline}
             </p>
 
             {/* Brand Colors */}
@@ -116,37 +107,24 @@ const Footer = () => {
             >
               <span
                 className="w-1/4"
-                style={{
-                  backgroundColor: BRAND_COLORS.orange,
-                }}
+                style={{ backgroundColor: BRAND_COLORS.orange }}
               />
-
               <span
                 className="w-1/4"
-                style={{
-                  backgroundColor: BRAND_COLORS.green,
-                }}
+                style={{ backgroundColor: BRAND_COLORS.green }}
               />
-
               <span
                 className="w-1/4"
-                style={{
-                  backgroundColor: BRAND_COLORS.yellow,
-                }}
+                style={{ backgroundColor: BRAND_COLORS.yellow }}
               />
-
               <span
                 className="w-1/4"
-                style={{
-                  backgroundColor: BRAND_COLORS.azure,
-                }}
+                style={{ backgroundColor: BRAND_COLORS.azure }}
               />
             </div>
           </div>
 
-          {/* ======================================
-              QUICK LINKS
-          ======================================= */}
+          {/* Quick Links */}
           <div>
             <h2 className="text-sm font-bold uppercase tracking-wider text-white">
               Quick Links
@@ -158,7 +136,7 @@ const Footer = () => {
                   <li key={link.path}>
                     <Link
                       to={link.path}
-                      className="inline-flex rounded-md text-sm text-gray-400 transition-colors duration-200 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#04abed] focus-visible:ring-offset-2 focus-visible:ring-offset-gray-950 motion-reduce:transition-none"
+                      className="inline-flex rounded-md text-sm text-gray-400 transition-colors duration-200 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#04ABED] focus-visible:ring-offset-2 focus-visible:ring-offset-gray-950 motion-reduce:transition-none"
                     >
                       {link.name}
                     </Link>
@@ -168,9 +146,7 @@ const Footer = () => {
             </nav>
           </div>
 
-          {/* ======================================
-              SERVICES
-          ======================================= */}
+          {/* Services */}
           <div>
             <h2 className="text-sm font-bold uppercase tracking-wider text-white">
               Services
@@ -181,7 +157,7 @@ const Footer = () => {
                 <li key={service}>
                   <Link
                     to="/services"
-                    className="inline-flex rounded-md text-sm text-gray-400 transition-colors duration-200 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#04abed] focus-visible:ring-offset-2 focus-visible:ring-offset-gray-950 motion-reduce:transition-none"
+                    className="inline-flex rounded-md text-sm text-gray-400 transition-colors duration-200 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#04ABED] focus-visible:ring-offset-2 focus-visible:ring-offset-gray-950 motion-reduce:transition-none"
                   >
                     {service}
                   </Link>
@@ -190,9 +166,7 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* ======================================
-              CONNECT
-          ======================================= */}
+          {/* Connect */}
           <div>
             <h2 className="text-sm font-bold uppercase tracking-wider text-white">
               Connect
@@ -206,7 +180,7 @@ const Footer = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={`${social.name} - opens in a new tab`}
-                    className="inline-flex rounded-md text-sm text-gray-400 transition-colors duration-200 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#04abed] focus-visible:ring-offset-2 focus-visible:ring-offset-gray-950 motion-reduce:transition-none"
+                    className="inline-flex rounded-md text-sm text-gray-400 transition-colors duration-200 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#04ABED] focus-visible:ring-offset-2 focus-visible:ring-offset-gray-950 motion-reduce:transition-none"
                   >
                     {social.name}
                   </a>
@@ -217,30 +191,23 @@ const Footer = () => {
             {/* Contact CTA */}
             <Link
               to="/contact"
-              className="mt-6 inline-flex items-center justify-center rounded-lg px-5 py-2.5 text-sm font-bold text-white shadow-md transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-[#fcca0a] focus-visible:ring-offset-2 focus-visible:ring-offset-gray-950 motion-reduce:transition-none"
-              style={{
-                backgroundColor: BRAND_COLORS.azure,
-              }}
+              className="mt-6 inline-flex items-center justify-center rounded-lg px-5 py-2.5 text-sm font-bold text-white shadow-md transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FCCA0A] focus-visible:ring-offset-2 focus-visible:ring-offset-gray-950 motion-reduce:transition-none"
+              style={{ backgroundColor: BRAND_COLORS.azure }}
             >
               Let's Talk
             </Link>
           </div>
         </div>
 
-        {/* ========================================
-            DIVIDER
-        ========================================= */}
+        {/* Divider */}
         <div aria-hidden="true" className="h-px w-full bg-gray-800" />
 
-        {/* ========================================
-            BOTTOM FOOTER
-        ========================================= */}
+        {/* Bottom Footer */}
         <div className="flex flex-col gap-5 py-7 sm:flex-row sm:items-center sm:justify-between">
-          {/* Copyright */}
           <p className="text-sm text-gray-500">
             © {currentYear}{" "}
             <span className="font-semibold text-gray-400">
-              Rupesh Lal Kumar
+              {profile.name}
             </span>
             . All rights reserved.
           </p>
@@ -251,7 +218,7 @@ const Footer = () => {
               <li>
                 <Link
                   to="/privacy-policy"
-                  className="rounded-md text-sm text-gray-500 transition-colors duration-200 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#04abed] focus-visible:ring-offset-2 focus-visible:ring-offset-gray-950 motion-reduce:transition-none"
+                  className="rounded-md text-sm text-gray-500 transition-colors duration-200 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#04ABED] focus-visible:ring-offset-2 focus-visible:ring-offset-gray-950 motion-reduce:transition-none"
                 >
                   Privacy Policy
                 </Link>
@@ -260,7 +227,7 @@ const Footer = () => {
               <li>
                 <Link
                   to="/terms"
-                  className="rounded-md text-sm text-gray-500 transition-colors duration-200 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#04abed] focus-visible:ring-offset-2 focus-visible:ring-offset-gray-950 motion-reduce:transition-none"
+                  className="rounded-md text-sm text-gray-500 transition-colors duration-200 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#04ABED] focus-visible:ring-offset-2 focus-visible:ring-offset-gray-950 motion-reduce:transition-none"
                 >
                   Terms
                 </Link>

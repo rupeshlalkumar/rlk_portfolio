@@ -1,945 +1,484 @@
-import main from "../assets/main.png";
 import { Link } from "react-router-dom";
 
-const BRAND_COLORS = {
-  orange: "#FB8D2E",
-  azure: "#04ABED",
-  green: "#3AA540",
-  yellow: "#FCCA0A",
-  black: "#000000",
-  white: "#FFFFFF",
+import SEO from "../components/SEO";
+import profile from "../data/profile";
+import businesses from "../data/businesses";
+import projects from "../data/projects";
+import journey from "../data/journey";
+import content from "../data/content";
+
+const accentStyles = {
+  orange: {
+    border: "border-orange-400",
+    text: "text-orange-600",
+    background: "bg-orange-50",
+  },
+  green: {
+    border: "border-green-500",
+    text: "text-green-600",
+    background: "bg-green-50",
+  },
+  yellow: {
+    border: "border-yellow-400",
+    text: "text-yellow-700",
+    background: "bg-yellow-50",
+  },
+  azure: {
+    border: "border-sky-500",
+    text: "text-sky-600",
+    background: "bg-sky-50",
+  },
 };
 
-const stats = [
-  {
-    value: "1+",
-    label: "Years Experience",
-    color: BRAND_COLORS.orange,
-    icon: "▣",
-  },
-  {
-    value: "10+",
-    label: "Projects",
-    color: BRAND_COLORS.azure,
-    icon: "◆",
-  },
-  {
-    value: "100%",
-    label: "Commitment",
-    color: BRAND_COLORS.green,
-    icon: "♡",
-  },
-];
-
-const specialties = [
-  {
-    name: "Web Development",
-    color: BRAND_COLORS.orange,
-    icon: "◎",
-  },
-  {
-    name: "Software",
-    color: BRAND_COLORS.azure,
-    icon: "▣",
-  },
-  {
-    name: "UI/UX Design",
-    color: BRAND_COLORS.green,
-    icon: "✎",
-  },
-  {
-    name: "Digital Solutions",
-    color: BRAND_COLORS.yellow,
-    icon: "✦",
-  },
-];
-
-const Home = () => {
+function SectionHeading({ eyebrow, title, description }) {
   return (
-    <main
-      id="main-content"
-      className="
-        min-h-screen
-        overflow-hidden
-        bg-white
-        text-gray-900
-        pt-20
-      "
-    >
-      {/* =====================================================
-          HERO
-      ====================================================== */}
-      <section
-        id="home"
-        aria-labelledby="hero-title"
-        className="
-          relative
-          isolate
-          overflow-hidden
-          scroll-mt-20
-        "
-      >
-        {/* =================================================
-            LIGHTWEIGHT BACKGROUND ATMOSPHERE
-        ================================================== */}
+    <div className="max-w-2xl">
+      <p className="text-sm font-bold uppercase tracking-[0.18em] text-sky-600">
+        {eyebrow}
+      </p>
 
-        {/* Orange glow */}
-        <div
-          aria-hidden="true"
-          className="
-            pointer-events-none
-            absolute
-            -left-40
-            top-24
-            -z-20
-            h-[380px]
-            w-[380px]
-            rounded-full
-            opacity-[0.06]
-            blur-[80px]
-          "
-          style={{
-            backgroundColor: BRAND_COLORS.orange,
-          }}
-        />
+      <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-gray-950 sm:text-4xl">
+        {title}
+      </h2>
 
-        {/* Azure glow */}
-        <div
-          aria-hidden="true"
-          className="
-            pointer-events-none
-            absolute
-            -right-40
-            top-40
-            -z-20
-            h-[460px]
-            w-[460px]
-            rounded-full
-            opacity-[0.08]
-            blur-[90px]
-          "
-          style={{
-            backgroundColor: BRAND_COLORS.azure,
-          }}
-        />
+      {description && (
+        <p className="mt-4 text-base leading-7 text-gray-600">
+          {description}
+        </p>
+      )}
+    </div>
+  );
+}
 
-        {/* Green glow */}
-        <div
-          aria-hidden="true"
-          className="
-            pointer-events-none
-            absolute
-            -bottom-40
-            right-[20%]
-            -z-20
-            h-[320px]
-            w-[320px]
-            rounded-full
-            opacity-[0.045]
-            blur-[80px]
-          "
-          style={{
-            backgroundColor: BRAND_COLORS.green,
-          }}
-        />
+function EmptyState({ message, linkText, linkPath }) {
+  return (
+    <div className="rounded-2xl border border-dashed border-gray-300 bg-gray-50 p-6">
+      <p className="text-sm leading-6 text-gray-600">{message}</p>
 
-        {/* =================================================
-            SUBTLE GRID
-        ================================================== */}
-        <div
-          aria-hidden="true"
-          className="
-            pointer-events-none
-            absolute
-            inset-0
-            -z-10
-            opacity-[0.018]
-          "
-          style={{
-            backgroundImage: `
-              linear-gradient(#000 1px, transparent 1px),
-              linear-gradient(90deg, #000 1px, transparent 1px)
-            `,
-            backgroundSize: "55px 55px",
-          }}
-        />
-
-        {/* =================================================
-            MAIN HERO CONTAINER
-        ================================================== */}
-        <div
-          className="
-            mx-auto
-            max-w-7xl
-            px-6
-            pb-10
-            pt-8
-            sm:px-8
-            lg:px-10
-            lg:pb-12
-            lg:pt-12
-          "
+      {linkText && linkPath && (
+        <Link
+          to={linkPath}
+          className="mt-4 inline-flex text-sm font-bold text-sky-600 hover:text-sky-700"
         >
+          {linkText}{" "}
+          <span aria-hidden="true" className="ml-2">
+            →
+          </span>
+        </Link>
+      )}
+    </div>
+  );
+}
+
+function Home() {
+  return (
+    <>
+      <SEO
+        title="Rupesh Lal Kumar | Entrepreneur & Business Builder"
+        description="Explore the entrepreneurial journey, businesses, projects, and insights of Rupesh Lal Kumar, an entrepreneur and business builder focused on digital solutions, technology, and education."
+        path="/"
+      />
+
+      <div className="overflow-hidden bg-white text-gray-900">
+        {/* 1. HERO */}
+        <section className="relative isolate border-b border-gray-100">
           <div
-            className="
-              grid
-              min-h-[calc(100vh-80px)]
-              items-center
-              gap-12
-              lg:grid-cols-[0.95fr_1.05fr]
-              lg:gap-8
-            "
-          >
-            {/* =================================================
-                LEFT CONTENT
-            ================================================== */}
-            <div className="relative z-20 max-w-2xl">
+            aria-hidden="true"
+            className="pointer-events-none absolute -right-24 -top-20 -z-10 h-80 w-80 rounded-full bg-sky-100/70 blur-3xl"
+          />
 
-              {/* Availability */}
-              <div
-                className="
-                  mb-7
-                  inline-flex
-                  items-center
-                  gap-2.5
-                  rounded-full
-                  border
-                  bg-white/90
-                  px-4
-                  py-2
-                  shadow-sm
-                  backdrop-blur-sm
-                  transition-transform
-                  duration-200
-                  hover:-translate-y-0.5
-                  motion-reduce:transition-none
-                "
-                style={{
-                  borderColor: `${BRAND_COLORS.green}55`,
-                }}
-                role="status"
-              >
-                {/* Lightweight status dot */}
-                <span
-                  aria-hidden="true"
-                  className="
-                    h-2.5
-                    w-2.5
-                    rounded-full
-                  "
-                  style={{
-                    backgroundColor: BRAND_COLORS.green,
-                  }}
-                />
-
-                <span className="text-sm font-semibold text-gray-800">
-                  Available for Projects
-                </span>
-
-                <span
-                  className="ml-1 text-sm"
-                  style={{
-                    color: BRAND_COLORS.green,
-                  }}
-                  aria-hidden="true"
-                >
-                  →
-                </span>
-              </div>
-
-              {/* Hello */}
-              <p
-                className="
-                  mb-4
-                  text-xs
-                  font-black
-                  uppercase
-                  tracking-[0.32em]
-                  sm:text-sm
-                "
-                style={{
-                  color: BRAND_COLORS.azure,
-                }}
-              >
-                Hello, I'm
+          <div className="mx-auto grid max-w-7xl items-center gap-10 px-6 py-10 sm:py-14 lg:grid-cols-[1.3fr_0.7fr] lg:px-10 lg:py-5">
+            <div>
+              <p className="inline-flex items-center rounded-full border border-gray-200 bg-white px-4 py-2 text-sm font-semibold text-gray-600 shadow-sm">
+                Entrepreneurial journey · Business · Technology
               </p>
 
-              {/* Main Heading */}
-              <h1
-                id="hero-title"
-                className="
-                  text-[3.6rem]
-                  font-black
-                  leading-[0.92]
-                  tracking-[-0.055em]
-                  sm:text-7xl
-                  lg:text-[5.8rem]
-                  xl:text-[6.3rem]
-                "
-              >
-                <span className="block text-gray-950">
-                  Rupesh Lal
-                </span>
-
-                <span
-                  className="mt-1 block"
-                  style={{
-                    color: BRAND_COLORS.orange,
-                  }}
-                >
-                  Kumar.
-                </span>
+              <h1 className="mt-7 text-4xl font-black leading-tight tracking-tight text-gray-950 sm:text-5xl lg:text-6xl">
+                {profile.name}
               </h1>
 
-              {/* Role */}
-              <h2
-                className="
-                  mt-7
-                  text-2xl
-                  font-extrabold
-                  tracking-tight
-                  sm:text-3xl
-                "
-              >
-                <span
-                  style={{
-                    color: BRAND_COLORS.orange,
-                  }}
-                >
-                  Entrepreneur
-                </span>
-
-                <span className="text-gray-900"> & </span>
-
-                <span
-                  style={{
-                    color: BRAND_COLORS.azure,
-                  }}
-                >
-                  Developer
-                </span>
-              </h2>
-
-              {/* Description */}
-              <p
-                className="
-                  mt-6
-                  max-w-xl
-                  text-base
-                  leading-8
-                  text-gray-600
-                  sm:text-lg
-                "
-              >
-                I build modern websites, software and digital experiences
-                that help businesses stand out, connect with customers and{" "}
-                <span
-                  className="font-bold"
-                  style={{
-                    color: BRAND_COLORS.green,
-                  }}
-                >
-                  grow.
-                </span>{" "}
-                <span aria-hidden="true">🚀</span>
+              <p className="mt-5 text-xl font-semibold text-gray-700 sm:text-2xl">
+                {profile.role}
               </p>
 
-              {/* =================================================
-                  CTA
-              ================================================== */}
-              <div
-                className="
-                  mt-8
-                  flex
-                  flex-col
-                  gap-3
-                  sm:flex-row
-                "
-              >
-                {/* Primary */}
+              <p className="mt-4 text-lg font-bold text-sky-600">
+                {profile.tagline}
+              </p>
+
+              <p className="mt-6 max-w-xl text-base leading-8 text-gray-600 sm:text-lg">
+                {profile.introduction}
+              </p>
+
+              <div className="mt-9 flex flex-col gap-4 sm:flex-row">
+                <Link
+                  to="/businesses"
+                  className="inline-flex items-center justify-center rounded-xl bg-sky-500 px-6 py-3.5 text-sm font-bold text-white shadow-sm transition hover:-translate-y-0.5 hover:bg-sky-600 hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2"
+                >
+                  Explore Businesses
+                  <span aria-hidden="true" className="ml-2">
+                    →
+                  </span>
+                </Link>
+
                 <Link
                   to="/projects"
-                  className="
-                    group
-                    inline-flex
-                    items-center
-                    justify-center
-                    gap-3
-                    rounded-2xl
-                    px-7
-                    py-4
-                    text-sm
-                    font-bold
-                    text-white
-                    shadow-lg
-                    transition-transform
-                    duration-200
-                    hover:-translate-y-1
-                    hover:shadow-xl
-                    focus:outline-none
-                    focus-visible:ring-2
-                    focus-visible:ring-offset-2
-                    motion-reduce:transition-none
-                  "
-                  style={{
-                    backgroundColor: BRAND_COLORS.azure,
-                  }}
+                  className="inline-flex items-center justify-center rounded-xl border border-gray-300 bg-white px-6 py-3.5 text-sm font-bold text-gray-800 transition hover:border-gray-500 hover:bg-gray-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2"
                 >
-                  <span>View My Work</span>
-
-                  <span
-                    aria-hidden="true"
-                    className="
-                      text-lg
-                      transition-transform
-                      duration-200
-                      group-hover:translate-x-1
-                      motion-reduce:transition-none
-                    "
-                  >
-                    →
-                  </span>
+                  View Projects
                 </Link>
-
-                {/* Secondary */}
-                <Link
-                  to="/contact"
-                  className="
-                    group
-                    inline-flex
-                    items-center
-                    justify-center
-                    gap-3
-                    rounded-2xl
-                    border-2
-                    bg-white/80
-                    px-7
-                    py-4
-                    text-sm
-                    font-bold
-                    backdrop-blur-sm
-                    transition-transform
-                    duration-200
-                    hover:-translate-y-1
-                    hover:bg-white
-                    focus:outline-none
-                    focus-visible:ring-2
-                    focus-visible:ring-offset-2
-                    motion-reduce:transition-none
-                  "
-                  style={{
-                    borderColor: BRAND_COLORS.orange,
-                    color: BRAND_COLORS.black,
-                  }}
-                >
-                  <span>Let's Work Together</span>
-
-                  <span
-                    aria-hidden="true"
-                    className="
-                      text-lg
-                      transition-transform
-                      duration-200
-                      group-hover:translate-x-1
-                      motion-reduce:transition-none
-                    "
-                    style={{
-                      color: BRAND_COLORS.orange,
-                    }}
-                  >
-                    →
-                  </span>
-                </Link>
-              </div>
-
-              {/* =================================================
-                  STATS
-              ================================================== */}
-              <div
-                className="
-                  mt-10
-                  grid
-                  max-w-2xl
-                  grid-cols-3
-                  rounded-3xl
-                  border
-                  border-gray-100
-                  bg-white/90
-                  p-5
-                  shadow-[0_15px_45px_rgba(15,23,42,0.06)]
-                  backdrop-blur-sm
-                  sm:mt-12
-                  sm:p-6
-                "
-                aria-label="Professional statistics"
-              >
-                {stats.map((stat, index) => (
-                  <div
-                    key={stat.label}
-                    className={`
-                      flex
-                      items-center
-                      gap-3
-                      px-3
-                      ${index !== 0 ? "border-l border-gray-200" : ""}
-                    `}
-                  >
-                    <span
-                      aria-hidden="true"
-                      className="
-                        hidden
-                        text-2xl
-                        font-black
-                        sm:block
-                      "
-                      style={{
-                        color: stat.color,
-                      }}
-                    >
-                      {stat.icon}
-                    </span>
-
-                    <div>
-                      <p
-                        className="
-                          text-2xl
-                          font-black
-                          sm:text-3xl
-                        "
-                        style={{
-                          color: stat.color,
-                        }}
-                      >
-                        {stat.value}
-                      </p>
-
-                      <p
-                        className="
-                          mt-1
-                          text-[11px]
-                          font-semibold
-                          text-gray-500
-                          sm:text-xs
-                        "
-                      >
-                        {stat.label}
-                      </p>
-                    </div>
-                  </div>
-                ))}
               </div>
             </div>
 
-            {/* =================================================
-                RIGHT VISUAL
-            ================================================== */}
-            <div
-              className="
-                relative
-                flex
-                min-h-[540px]
-                items-center
-                justify-center
-                lg:min-h-[650px]
-              "
-              aria-label="Rupesh Lal Kumar profile"
-            >
-              {/* Main circle */}
-              <div
-                aria-hidden="true"
-                className="
-                  absolute
-                  h-[350px]
-                  w-[350px]
-                  rounded-full
-                  border
-                  bg-gradient-to-br
-                  from-orange-50
-                  via-white
-                  to-blue-50
-                  sm:h-[470px]
-                  sm:w-[470px]
-                  lg:h-[540px]
-                  lg:w-[540px]
-                "
-                style={{
-                  borderColor: `${BRAND_COLORS.azure}30`,
-                  boxShadow: `0 0 70px ${BRAND_COLORS.azure}18`,
-                }}
-              />
+            {/* Brand statement */}
+            <div className="mx-auto w-full max-w-md">
+              <div className="rounded-3xl border border-gray-200 bg-white p-7 shadow-xl shadow-gray-200/60 sm:p-9">
+                <p className="text-sm font-bold uppercase tracking-[0.2em] text-gray-500">
+                  My philosophy
+                </p>
 
-              {/* Yellow ring */}
-              <div
-                aria-hidden="true"
-                className="
-                  absolute
-                  -right-2
-                  top-[5%]
-                  h-32
-                  w-32
-                  rounded-full
-                  border-[7px]
-                  opacity-90
-                  sm:right-0
-                  lg:right-4
-                "
-                style={{
-                  borderColor: BRAND_COLORS.yellow,
-                }}
-              />
-
-              {/* Azure ring */}
-              <div
-                aria-hidden="true"
-                className="
-                  absolute
-                  bottom-[10%]
-                  left-[2%]
-                  h-24
-                  w-24
-                  rounded-full
-                  border-[5px]
-                  opacity-70
-                  sm:left-[5%]
-                "
-                style={{
-                  borderColor: BRAND_COLORS.azure,
-                }}
-              />
-
-              {/* =================================================
-                  ORANGE / AZURE DOT PATTERN
-              ================================================== */}
-              <div
-                aria-hidden="true"
-                className="
-                  absolute
-                  left-[7%]
-                  top-[25%]
-                  grid
-                  grid-cols-4
-                  gap-2
-                  opacity-70
-                "
-              >
-                {Array.from({ length: 16 }, (_, index) => (
-                  <span
-                    key={index}
-                    className="h-1.5 w-1.5 rounded-full"
-                    style={{
-                      backgroundColor:
-                        index % 2 === 0
-                          ? BRAND_COLORS.orange
-                          : BRAND_COLORS.azure,
-                    }}
-                  />
-                ))}
-              </div>
-
-              {/* Green dots */}
-              <div
-                aria-hidden="true"
-                className="
-                  absolute
-                  bottom-[25%]
-                  right-[3%]
-                  grid
-                  grid-cols-4
-                  gap-2
-                  opacity-60
-                "
-              >
-                {Array.from({ length: 12 }, (_, index) => (
-                  <span
-                    key={index}
-                    className="h-1.5 w-1.5 rounded-full"
-                    style={{
-                      backgroundColor: BRAND_COLORS.green,
-                    }}
-                  />
-                ))}
-              </div>
-
-              {/* Orange atmosphere */}
-              <div
-                aria-hidden="true"
-                className="
-                  absolute
-                  bottom-[15%]
-                  left-[4%]
-                  h-28
-                  w-28
-                  rounded-full
-                  opacity-15
-                  blur-xl
-                "
-                style={{
-                  backgroundColor: BRAND_COLORS.orange,
-                }}
-              />
-
-              {/* =================================================
-                  PROFILE PHOTO
-              ================================================== */}
-              <div className="relative z-10 mt-6">
-
-                {/* Image glow */}
-                <div
-                  aria-hidden="true"
-                  className="
-                    absolute
-                    inset-12
-                    rounded-full
-                    opacity-15
-                    blur-2xl
-                  "
-                  style={{
-                    backgroundColor: BRAND_COLORS.azure,
-                  }}
-                />
-
-                {/* Image container */}
-                <div
-                  className="
-                    relative
-                    h-[470px]
-                    w-[360px]
-                    overflow-hidden
-                    rounded-[3rem]
-                    sm:h-[570px]
-                    sm:w-[430px]
-                    lg:h-[610px]
-                    lg:w-[455px]
-                  "
-                >
-                  <img
-                    src={main}
-                    alt="Rupesh Lal Kumar"
-                    width="455"
-                    height="610"
-                    fetchPriority="high"
-                    loading="eager"
-                    decoding="async"
-                    className="
-                      h-full
-                      w-full
-                      object-cover
-                      object-top
-                    "
-                  />
-
-                  {/* Bottom gradient */}
-                  <div
-                    aria-hidden="true"
-                    className="
-                      pointer-events-none
-                      absolute
-                      inset-x-0
-                      bottom-0
-                      h-24
-                      bg-gradient-to-t
-                      from-white/20
-                      to-transparent
-                    "
-                  />
-                </div>
-
-                {/* =================================================
-                    TECHNOLOGY BADGE
-                ================================================== */}
-                <div
-                  className="
-                    absolute
-                    -left-5
-                    top-[25%]
-                    flex
-                    h-14
-                    w-14
-                    items-center
-                    justify-center
-                    rounded-2xl
-                    bg-white
-                    text-xl
-                    shadow-lg
-                    sm:-left-8
-                  "
-                  style={{
-                    color: BRAND_COLORS.azure,
-                    border: `1px solid ${BRAND_COLORS.azure}30`,
-                  }}
-                  aria-hidden="true"
-                >
-                  &lt;/&gt;
-                </div>
-
-                {/* Growth badge */}
-                <div
-                  className="
-                    absolute
-                    -right-5
-                    top-[45%]
-                    flex
-                    h-14
-                    w-14
-                    items-center
-                    justify-center
-                    rounded-2xl
-                    bg-white
-                    text-xl
-                    shadow-lg
-                    sm:-right-8
-                  "
-                  style={{
-                    color: BRAND_COLORS.green,
-                    border: `1px solid ${BRAND_COLORS.green}30`,
-                  }}
-                  aria-hidden="true"
-                >
-                  ↗
-                </div>
-
-                {/* =================================================
-                    STATUS CARD
-                ================================================== */}
-                <div
-                  className="
-                    absolute
-                    -bottom-5
-                    right-[-15px]
-                    rounded-2xl
-                    border
-                    border-white
-                    bg-white/95
-                    px-4
-                    py-3
-                    shadow-[0_15px_40px_rgba(15,23,42,0.12)]
-                    backdrop-blur-sm
-                    sm:-right-10
-                    sm:px-5
-                    sm:py-4
-                  "
-                >
-                  <div className="flex items-center gap-3">
-
+                <div className="mt-7 space-y-5">
+                  {[
+                    { word: "Think.", color: "text-orange-500" },
+                    { word: "Build.", color: "text-green-600" },
+                    { word: "Sell.", color: "text-yellow-600" },
+                    { word: "Grow.", color: "text-sky-600" },
+                  ].map((item, index) => (
                     <div
-                      className="
-                        flex
-                        h-11
-                        w-11
-                        items-center
-                        justify-center
-                        rounded-xl
-                        text-lg
-                        font-black
-                        text-white
-                      "
-                      style={{
-                        backgroundColor: BRAND_COLORS.green,
-                      }}
-                      aria-hidden="true"
+                      key={item.word}
+                      className="flex items-center gap-4"
                     >
-                      ✓
-                    </div>
+                      <span className="text-sm font-semibold text-gray-400">
+                        0{index + 1}
+                      </span>
 
-                    <div>
-                      <p className="text-[11px] font-medium text-gray-500">
-                        Currently
-                      </p>
-
-                      <p className="text-sm font-bold text-gray-900">
-                        Building & Learning
+                      <p
+                        className={`text-3xl font-black tracking-tight sm:text-4xl ${item.color}`}
+                      >
+                        {item.word}
                       </p>
                     </div>
-                  </div>
+                  ))}
                 </div>
+
+                <div className="mt-8 h-px bg-gray-200" />
+
+                <p className="mt-5 text-sm leading-6 text-gray-600">
+                  Learning, creating practical solutions, serving customers,
+                  and developing businesses one step at a time.
+                </p>
               </div>
             </div>
           </div>
+        </section>
 
-          {/* =====================================================
-              SPECIALIZED IN
-          ====================================================== */}
-          <div
-            className="
-              mt-2
-              flex
-              flex-col
-              gap-5
-              rounded-3xl
-              border
-              border-gray-100
-              bg-white/90
-              px-5
-              py-5
-              shadow-[0_15px_45px_rgba(15,23,42,0.05)]
-              backdrop-blur-sm
-              lg:flex-row
-              lg:items-center
-              lg:px-7
-            "
-          >
-            <p className="shrink-0 text-sm font-bold text-gray-900">
-              Specialized In:
-            </p>
+        {/* 2. BUSINESSES */}
+        <section
+          id="businesses"
+          className="mx-auto max-w-7xl px-6 py-20 sm:py-24 lg:px-8"
+        >
+          <SectionHeading
+            eyebrow="What I build"
+            title="Businesses"
+            description="Explore the businesses and initiatives I am developing across digital services, local online services, and education."
+          />
 
-            <div
-              className="
-                grid
-                flex-1
-                grid-cols-2
-                gap-3
-                md:grid-cols-4
-              "
-            >
-              {specialties.map((item) => (
-                <div
-                  key={item.name}
-                  className="
-                    group
-                    flex
-                    items-center
-                    gap-2.5
-                    rounded-full
-                    border
-                    border-gray-100
-                    bg-white
-                    px-4
-                    py-2.5
-                    transition-transform
-                    duration-200
-                    hover:-translate-y-0.5
-                    hover:shadow-md
-                    motion-reduce:transition-none
-                  "
+          <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {businesses.map((business) => {
+              const accent =
+                accentStyles[business.accent] || accentStyles.azure;
+
+              return (
+                <article
+                  key={business.shortName}
+                  className={`flex h-full flex-col rounded-2xl border border-gray-200 border-t-4 ${accent.border} bg-white p-6 transition duration-200 hover:-translate-y-1 hover:shadow-lg`}
                 >
                   <span
-                    aria-hidden="true"
-                    className="text-lg"
-                    style={{
-                      color: item.color,
-                    }}
+                    className={`inline-flex h-12 w-12 items-center justify-center rounded-xl text-sm font-extrabold ${accent.background} ${accent.text}`}
                   >
-                    {item.icon}
+                    {business.shortName}
                   </span>
 
-                  <span
-                    className="
-                      text-xs
-                      font-semibold
-                      text-gray-700
-                      sm:text-sm
-                    "
+                  <h3 className="mt-5 text-xl font-bold text-gray-950">
+                    {business.name}
+                  </h3>
+
+                  <p className="mt-3 flex-1 text-sm leading-7 text-gray-600">
+                    {business.description}
+                  </p>
+
+                  <Link
+                    to={business.path}
+                    className={`mt-6 inline-flex items-center text-sm font-bold ${accent.text} hover:underline`}
                   >
-                    {item.name}
+                    View Business
+                    <span aria-hidden="true" className="ml-2">
+                      →
+                    </span>
+                  </Link>
+                </article>
+              );
+            })}
+          </div>
+
+          <div className="mt-8">
+            <Link
+              to="/businesses"
+              className="text-sm font-bold text-gray-800 hover:text-sky-600"
+            >
+              Explore all businesses <span aria-hidden="true">→</span>
+            </Link>
+          </div>
+        </section>
+
+        {/* 3. SELECTED PROJECTS */}
+        <section className="border-y border-gray-100 bg-gray-50">
+          <div className="mx-auto max-w-7xl px-6 py-20 sm:py-24 lg:px-8">
+            <SectionHeading
+              eyebrow="Practical work"
+              title="Selected Projects"
+              description="A growing collection of projects, experiments, and solutions built through practical work."
+            />
+
+            {projects.length > 0 ? (
+              <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                {projects.slice(0, 3).map((project) => (
+                  <article
+                    key={project.name}
+                    className="flex h-full flex-col rounded-2xl border border-gray-200 bg-white p-6 transition hover:-translate-y-1 hover:shadow-lg"
+                  >
+                    <div className="flex items-start justify-between gap-3">
+                      <h3 className="text-lg font-bold text-gray-950">
+                        {project.name}
+                      </h3>
+
+                      {project.status && (
+                        <span className="shrink-0 rounded-full bg-gray-100 px-3 py-1 text-xs font-semibold text-gray-600">
+                          {project.status}
+                        </span>
+                      )}
+                    </div>
+
+                    <p className="mt-3 flex-1 text-sm leading-7 text-gray-600">
+                      {project.description}
+                    </p>
+
+                    {project.business && (
+                      <p className="mt-4 text-xs font-semibold text-gray-500">
+                        {project.business}
+                      </p>
+                    )}
+
+                    {project.technologies?.length > 0 && (
+                      <div className="mt-4 flex flex-wrap gap-2">
+                        {project.technologies.map((technology) => (
+                          <span
+                            key={technology}
+                            className="rounded-md bg-sky-50 px-2.5 py-1 text-xs font-medium text-sky-700"
+                          >
+                            {technology}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+
+                    <Link
+                      to={project.path || "/projects"}
+                      className="mt-6 text-sm font-bold text-sky-600 hover:text-sky-700"
+                    >
+                      View Project <span aria-hidden="true">→</span>
+                    </Link>
+                  </article>
+                ))}
+              </div>
+            ) : (
+              <div className="mt-10">
+                <EmptyState
+                  message="Project showcases will appear here as projects are added to the portfolio."
+                  linkText="Explore the Projects page"
+                  linkPath="/projects"
+                />
+              </div>
+            )}
+
+            <div className="mt-8">
+              <Link
+                to="/projects"
+                className="inline-flex items-center rounded-lg border border-gray-300 bg-white px-5 py-3 text-sm font-bold text-gray-800 transition hover:border-sky-500 hover:text-sky-600"
+              >
+                View All Projects
+                <span aria-hidden="true" className="ml-2">
+                  →
+                </span>
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* 4. ENTREPRENEURIAL JOURNEY */}
+        <section className="mx-auto max-w-7xl px-6 py-20 sm:py-24 lg:px-8">
+          <SectionHeading
+            eyebrow="The process"
+            title="My Entrepreneurial Journey"
+            description="A continuous process of learning, building, working, and developing as a business builder."
+          />
+
+          <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+            {journey.map((step, index) => (
+              <article key={step.title} className="relative">
+                <div className="h-full rounded-2xl border border-gray-200 bg-white p-5">
+                  <span className="text-sm font-bold text-sky-600">
+                    STEP 0{index + 1}
                   </span>
+
+                  <h3 className="mt-4 text-lg font-bold text-gray-950">
+                    {step.title}
+                  </h3>
+
+                  <p className="mt-2 text-sm leading-6 text-gray-600">
+                    {step.description}
+                  </p>
                 </div>
+
+                {index < journey.length - 1 && (
+                  <span
+                    aria-hidden="true"
+                    className="absolute -right-3 top-1/2 z-10 hidden -translate-y-1/2 text-xl font-bold text-gray-400 lg:block"
+                  >
+                    →
+                  </span>
+                )}
+              </article>
+            ))}
+          </div>
+
+          <div className="mt-8">
+            <Link
+              to="/journey"
+              className="inline-flex items-center text-sm font-bold text-sky-600 hover:text-sky-700"
+            >
+              Explore My Journey
+              <span aria-hidden="true" className="ml-2">
+                →
+              </span>
+            </Link>
+          </div>
+        </section>
+
+        {/* 5. CONTENT PREVIEW */}
+        <section className="border-y border-gray-100 bg-gray-50">
+          <div className="mx-auto max-w-7xl px-6 py-20 sm:py-24 lg:px-8">
+            <SectionHeading
+              eyebrow="Ideas and learning"
+              title="Content & Insights"
+              description="Articles, videos, and insights will share lessons from entrepreneurship, software development, business building, and learning."
+            />
+
+            <div className="mt-10 grid gap-6 md:grid-cols-3">
+              {[
+                {
+                  title: "Latest Articles",
+                  description:
+                    "Written ideas, lessons, and practical explanations.",
+                  items: content.articles,
+                  type: "articles",
+                },
+                {
+                  title: "Latest Videos",
+                  description:
+                    "Video content about entrepreneurship and technology.",
+                  items: content.videos,
+                  type: "videos",
+                },
+                {
+                  title: "Latest Insights",
+                  description:
+                    "Short observations, experiments, and lessons learned.",
+                  items: content.insights,
+                  type: "insights",
+                },
+              ].map((group) => (
+                <article
+                  key={group.type}
+                  className="flex flex-col rounded-2xl border border-gray-200 bg-white p-6"
+                >
+                  <h3 className="text-xl font-bold text-gray-950">
+                    {group.title}
+                  </h3>
+
+                  <p className="mt-3 text-sm leading-7 text-gray-600">
+                    {group.description}
+                  </p>
+
+                  {group.items.length > 0 ? (
+                    <ul className="mt-5 space-y-4">
+                      {group.items.slice(0, 2).map((item) => (
+                        <li key={item.title}>
+                          <Link
+                            to={item.path || "/content"}
+                            className="font-semibold text-sky-600 hover:text-sky-700"
+                          >
+                            {item.title}
+                          </Link>
+
+                          {item.description && (
+                            <p className="mt-1 text-sm leading-6 text-gray-500">
+                              {item.description}
+                            </p>
+                          )}
+                        </li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <p className="mt-5 text-sm text-gray-500">
+                      New content will be featured here.
+                    </p>
+                  )}
+
+                  <Link
+                    to="/content"
+                    className="mt-6 inline-flex text-sm font-bold text-gray-800 hover:text-sky-600"
+                  >
+                    Explore Content
+                    <span aria-hidden="true" className="ml-2">
+                      →
+                    </span>
+                  </Link>
+                </article>
               ))}
             </div>
           </div>
-        </div>
-      </section>
-    </main>
+        </section>
+
+        {/* 6. CONTACT CTA */}
+        <section className="px-6 py-20 sm:py-24 lg:px-8">
+          <div className="mx-auto max-w-5xl overflow-hidden rounded-3xl bg-gray-950 px-6 py-12 text-center sm:px-12 sm:py-16">
+            <p className="text-sm font-bold uppercase tracking-[0.18em] text-sky-400">
+              Let's connect
+            </p>
+
+            <h2 className="mx-auto mt-4 max-w-3xl text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+              Have an idea, project, or business opportunity?
+            </h2>
+
+            <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-gray-300">
+              Let's discuss how we can turn a practical idea into meaningful
+              work.
+            </p>
+
+            <Link
+              to="/contact"
+              className="mt-8 inline-flex items-center justify-center rounded-xl bg-sky-500 px-7 py-3.5 text-sm font-bold text-white transition hover:bg-sky-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-950"
+            >
+              Contact Me
+              <span aria-hidden="true" className="ml-2">
+                →
+              </span>
+            </Link>
+          </div>
+        </section>
+      </div>
+    </>
   );
-};
+}
 
 export default Home;

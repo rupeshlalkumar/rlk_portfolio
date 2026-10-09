@@ -4,13 +4,14 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import ScrollToTop from "../components/ScrollToTop";
 
-function MainLayout() {
+export default function MainLayout() {
   return (
     <>
       <ScrollToTop />
+
       <Navbar />
 
-      <main>
+      <main id="main-content" className="pt-20">
         <Outlet />
       </main>
 
@@ -18,5 +19,3 @@ function MainLayout() {
     </>
   );
 }
-
-export default MainLayout;

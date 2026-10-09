@@ -1,159 +1,178 @@
-import Profile from "../assets/Profile.jpg";
 import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
+import Profile from "../assets/Profile.jpg";
+import profile from "../data/profile";
 
-const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
+const navigation = [
+  { label: "Home", path: "/", color: "#FB8D2E" },
+  { label: "About", path: "/about", color: "#3AA540" },
+  { label: "Businesses", path: "/businesses", color: "#FCCA0A" },
+  { label: "Projects", path: "/projects", color: "#04ABED" },
+  { label: "Journey", path: "/journey", color: "#FB8D2E" },
+  { label: "Content", path: "/content", color: "#3AA540" },
+  { label: "Contact", path: "/contact", color: "#04ABED" },
+];
 
-  const navLinks = [
-    { name: "Home", path: "/", color: "#fb8d2e" },
-    { name: "About", path: "/about", color: "#3aa540" },
-    { name: "Projects", path: "/projects", color: "#04abed" },
-    { name: "Services", path: "/services", color: "#fcca0a" },
-    { name: "Contact", path: "/contact", color: "#fb8d2e" },
-  ];
+export default function Navbar() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  function closeMenu() {
+    setMenuOpen(false);
+  }
 
   return (
-    <nav className="fixed left-0 top-0 z-50 w-full bg-white/95 shadow-sm backdrop-blur-md">
-      <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 lg:px-8">
+    <header className="fixed left-0 top-0 z-50 w-full border-b border-gray-100 bg-white/95 shadow-sm backdrop-blur-md">
+      <div className="mx-auto flex min-h-20 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
 
-        {/* Logo */}
+        {/* Brand */}
         <Link
           to="/"
-          onClick={() => setIsOpen(false)}
-          className="group flex items-center gap-2"
-          aria-label="RLK Home"
+          onClick={closeMenu}
+          className="group flex shrink-0 items-center gap-3"
+          aria-label="Rupesh Lal Kumar, Home"
         >
-          {/* <div
-            className="flex h-11 w-11 items-center justify-center rounded-xl text-xl font-black text-white shadow-md transition-transform duration-300 group-hover:scale-105"
-            style={{ backgroundColor: "#fb8d2e" }}
-          >
-            RLK
-          </div> */}
           <img
             src={Profile}
-            alt="Logo"
-             className="h-11 w-11 rounded-full object-cover shadow-md transition-transform duration-300 group-hover:scale-105"
-            style={{ border: "3px solid #04abed" }}
-
+            alt="Rupesh Lal Kumar"
+            className="h-11 w-11 rounded-full object-cover shadow-sm transition-transform duration-300 group-hover:scale-105"
+            style={{ border: "3px solid #04ABED" }}
           />
 
           <div className="hidden sm:block">
-            <span
-              className="text-xl font-extrabold tracking-tight"
-              style={{ color: "#3aa540" }}
-            >
-              Rupesh Lal Kumar
+            <span className="block text-base font-extrabold tracking-tight text-gray-900 lg:text-lg">
+              {profile.name}
             </span>
 
-            <p className="text-xs font-medium text-gray-600">
-              Software Entrepreneur
-            </p>
+            <span className="block text-xs font-medium text-gray-600">
+              {profile.role}
+            </span>
           </div>
         </Link>
 
         {/* Desktop Navigation */}
-        <div className="hidden items-center gap-8 md:flex">
-          {navLinks.map((link) => (
+        <nav
+          className="hidden items-center gap-5 lg:flex xl:gap-6"
+          aria-label="Main navigation"
+        >
+          {navigation.map((item) => (
             <NavLink
-              key={link.name}
-              to={link.path}
-              className="group relative py-2 text-sm font-semibold text-gray-700 transition-colors duration-300 hover:text-black"
+              key={item.path}
+              to={item.path}
+              end={item.path === "/"}
+              className={({ isActive }) =>
+                `group relative whitespace-nowrap py-2 text-sm font-semibold transition-colors duration-300 ${
+                  isActive
+                    ? "text-gray-950"
+                    : "text-gray-600 hover:text-gray-950"
+                }`
+              }
             >
               {({ isActive }) => (
                 <>
-                  {link.name}
+                  {item.label}
 
                   <span
                     className={`absolute bottom-0 left-0 h-0.5 rounded-full transition-all duration-300 ${
                       isActive ? "w-full" : "w-0 group-hover:w-full"
                     }`}
-                    style={{ backgroundColor: link.color }}
+                    style={{ backgroundColor: item.color }}
                   />
                 </>
               )}
             </NavLink>
           ))}
 
-          {/* CTA */}
+          {/* Desktop CTA */}
           <NavLink
             to="/contact"
-            className="rounded-lg px-5 py-2.5 text-sm font-bold text-white shadow-md transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg"
-            style={{ backgroundColor: "#04abed" }}
+            className="whitespace-nowrap rounded-lg px-4 py-2.5 text-sm font-bold text-white shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md"
+            style={{ backgroundColor: "#04ABED" }}
           >
             Let's Talk
           </NavLink>
-        </div>
+        </nav>
 
-        {/* Mobile Menu Button */}
+        {/* Mobile / Tablet Menu Button */}
         <button
           type="button"
-          onClick={() => setIsOpen(!isOpen)}
-          className="flex h-10 w-10 items-center justify-center rounded-lg md:hidden"
+          onClick={() => setMenuOpen((previous) => !previous)}
+          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg transition-colors duration-200 lg:hidden"
           style={{
-            backgroundColor: isOpen ? "#fb8d2e" : "#04abed",
+            backgroundColor: menuOpen ? "#FB8D2E" : "#04ABED",
           }}
-          aria-label="Toggle navigation menu"
-          aria-expanded={isOpen}
+          aria-label={menuOpen ? "Close navigation" : "Open navigation"}
+          aria-expanded={menuOpen}
+          aria-controls="primary-navigation"
         >
-          <div className="flex flex-col gap-1.5">
+          <span className="flex flex-col gap-1.5">
             <span
               className={`block h-0.5 w-5 bg-white transition-transform duration-300 ${
-                isOpen ? "translate-y-2 rotate-45" : ""
+                menuOpen ? "translate-y-2 rotate-45" : ""
               }`}
             />
 
             <span
               className={`block h-0.5 w-5 bg-white transition-opacity duration-300 ${
-                isOpen ? "opacity-0" : "opacity-100"
+                menuOpen ? "opacity-0" : "opacity-100"
               }`}
             />
 
             <span
               className={`block h-0.5 w-5 bg-white transition-transform duration-300 ${
-                isOpen ? "-translate-y-2 -rotate-45" : ""
+                menuOpen ? "-translate-y-2 -rotate-45" : ""
               }`}
             />
-          </div>
+          </span>
         </button>
       </div>
 
-      {/* Mobile Navigation */}
+      {/* Mobile / Tablet Navigation */}
       <div
-        className={`overflow-hidden border-t border-gray-100 bg-white transition-all duration-300 md:hidden ${
-          isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+        id="primary-navigation"
+        className={`overflow-hidden border-t border-gray-100 bg-white transition-all duration-300 lg:hidden ${
+          menuOpen
+            ? "max-h-[80vh] overflow-y-auto opacity-100"
+            : "max-h-0 opacity-0"
         }`}
+        aria-label="Mobile navigation"
+        aria-hidden={!menuOpen}
       >
-        <div className="space-y-2 px-6 py-5">
-          {navLinks.map((link) => (
+        <nav className="space-y-2 px-4 py-5 sm:px-6">
+          {navigation.map((item) => (
             <NavLink
-              key={link.name}
-              to={link.path}
-              onClick={() => setIsOpen(false)}
-              className="block rounded-lg px-4 py-3 text-sm font-semibold text-gray-700 transition-all duration-200 hover:text-black"
+              key={item.path}
+              to={item.path}
+              end={item.path === "/"}
+              onClick={closeMenu}
+              tabIndex={menuOpen ? 0 : -1}
+              className={({ isActive }) =>
+                `block rounded-lg px-4 py-3 text-sm font-semibold transition-colors duration-200 ${
+                  isActive
+                    ? "bg-gray-50"
+                    : "text-gray-700 hover:bg-gray-50 hover:text-gray-950"
+                }`
+              }
               style={({ isActive }) => ({
-                borderLeft: `3px solid ${link.color}`,
-                backgroundColor: isActive ? `${link.color}10` : "transparent",
-                color: isActive ? link.color : undefined,
+                borderLeft: `3px solid ${item.color}`,
+                color: isActive ? item.color : undefined,
               })}
             >
-              {link.name}
+              {item.label}
             </NavLink>
           ))}
 
           {/* Mobile CTA */}
           <NavLink
             to="/contact"
-            onClick={() => setIsOpen(false)}
-            className="mt-3 block rounded-lg px-4 py-3 text-center text-sm font-bold text-white"
-            style={{ backgroundColor: "#04abed" }}
+            onClick={closeMenu}
+            tabIndex={menuOpen ? 0 : -1}
+            className="mt-3 block rounded-lg px-4 py-3 text-center text-sm font-bold text-white shadow-sm transition-opacity hover:opacity-90"
+            style={{ backgroundColor: "#04ABED" }}
           >
             Let's Talk
           </NavLink>
-        </div>
+        </nav>
       </div>
-    </nav>
+    </header>
   );
-};
-
-export default Navbar;
+}
